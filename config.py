@@ -1,6 +1,7 @@
 import os
 
 class Config:
+        SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://lorna:0724276722@localhost/watchlist'
 
     pass
 class ProdConfig(Config):
