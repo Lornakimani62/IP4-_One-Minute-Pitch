@@ -23,6 +23,9 @@ class User(UserMixin, db.Model):
     dislikes = db.relationship('Downvote', backref='user', lazy='dynamic')
 
     @property
+    def password(self):
+        raise AttributeError('You cannot read the password attribute')
+
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
