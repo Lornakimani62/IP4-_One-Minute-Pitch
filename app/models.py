@@ -54,9 +54,9 @@ class User(UserMixin, db.Model):
         db.session.commit()
 
     @classmethod
-    def get_user(cls,id):
-        users = User.query.filter(User.id > 1).all()
-        return users
+    def get_user(cls,username):
+        user = User.query.filter_by(username = 'User.username').first()
+        return user
 
 class Pitch(db.Model):
     __tablename__= 'pitches'
