@@ -61,16 +61,6 @@ class User(UserMixin, db.Model):
         user = User.query.filter_by(username = 'User.username').first()
         return user
 
-class Pitch(db.Model):
-    __tablename__= 'pitches'
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(140))
-    category = db.Column(db.String(140))
-    likes=db.relationship('Upvote', backref='post', lazy='dynamic')
-    dislikes=db.relationship('Downvote', backref='post', lazy='dynamic')
-    comments=db.relationship('Comments', backref='post', lazy='dynamic')
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
     @classmethod
     def retrieve_posts(cls,id):
         pitches = Pitch.filter_by(id=id).all()
@@ -103,7 +93,8 @@ class Upvote(db.Model):
 	__tablename__='upvotes'
 	id=db.Column(db.Integer,primary_key=True)
 	pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
-    # user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
 	def save(self):
 		db.session.add(self)
 		db.session.commit()
@@ -112,7 +103,7 @@ class Downvote(db.Model):
 	__tablename__='downvotes'
 	id=db.Column(db.Integer,primary_key=True)
 	pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
-    # user_id=db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 	def save(self):
 		db.session.add(self)
