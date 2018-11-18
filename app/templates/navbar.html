@@ -1,0 +1,32 @@
+<nav class="navbar sticky-top navbar-expand-lg nav class=navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Idea Hub</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/#interviewpitches">Interview</a>
+            <a class="dropdown-item" href="/#productpitches">Product</a>
+            <a class="dropdown-item" href="/#promotionpitches">Promotion</a>
+            <a class="dropdown-item" href="/#businesspitches">Business</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if current_user.is_authenticated %}
+        <li style="color:white;padding:15px;">{{current_user.username}}</li>
+        <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+        {% else %}
+        <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
+        {%endif%}
+      </ul>
+    </div>
+  </nav>

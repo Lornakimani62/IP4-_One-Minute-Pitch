@@ -1,0 +1,73 @@
+{% extends 'base.html'%}
+{% import 'macros.html' as macro %}
+
+<!-- Styles block -->
+
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <h1>In life, you only have 60 seconds to impress someone. 1 minute can make or break you.We give you a platform to pitch your ideas </h1>
+
+    </div>
+</div>
+
+
+<!-- homepage section -->
+<div class="container-fluid">
+    <div class="row" id="product">
+        <div class="category col-md-12">
+            <div class="jumbotron">
+                <h4 class="title">Product Pitches</h4>
+                <p><em>Take a minute to provide a product pitch that will get your customers attention. Read and comment on other pitches as well.</em></p>
+            </div>
+                <ul>
+                    {{macro.displayPitches(productpitches)}}
+                </ul>
+        </div>
+    </div>
+
+
+    <div class="row" id="Business">
+            <div class="category col-md-12">
+                <div class="jumbotron">
+                    <h4 class="title">Business Pitches</h4>
+                    <p><em>Take a minute to provide a Business pitch that will get investors attention. Read and comment on other pitches as well.</em></p>
+                </div>
+                    <ul>
+                        {{macro.displayPitches(businesspitches)}}
+                    </ul>
+            </div>
+    </div>
+
+    <div class="row" id="Promotion">
+            <div class="category col-md-12">
+                <div class="jumbotron">
+                    <h4 class="title">Promotion Pitches</h4>
+                    <p><em>Take a minute to provide an promotion pitch that will help people land that big promotion</em></p>
+                </div>
+                    <ul>
+                        {{macro.displayPitches(promotionpitches)}}
+                    </ul>
+
+            </div>
+    </div>
+    <div class="row" id="Interview">
+        <div class="category col-md-12">
+            <div class="jumbotron">
+                <h4 class="title">Interview Pitches</h4>
+                <p><em>Take a minute to provide an Interview pitch that will land someone a job </em></p>
+            </div>
+                <ul>
+                    {{macro.displayPitches(interviewpitches)}}
+                </ul>
+
+        </div>
+</div>
+</div>
+{% endblock%}

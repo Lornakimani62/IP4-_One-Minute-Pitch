@@ -18,4 +18,4 @@ def index():
     likes = Like.get_all_likes(pitch_id=Pitch.id)
     dislikes = Dislike.get_all_dislikes(pitch_id=Pitch.id)
 
-    return render_template('post.html', interviewpitches = interviewpitches, productpitches = productpitches, promotionpitches = promotionpitches, businesspitches = businesspitches, likes=likes, dislikes=dislikes)
+    return render_template('index.html', interviewpitches = interviewpitches, productpitches = productpitches, promotionpitches = promotionpitches, businesspitches = businesspitches, likes=likes, dislikes=dislikes)

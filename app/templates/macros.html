@@ -1,0 +1,19 @@
+{% macro displayPitches(pitches)%}
+<div class="container-fluid">
+    <div class="row">
+    {% for pitch in pitches %}
+    <div class="col-md-4 d-flex mb-3">
+    <div class="card border-dark flex-fill">
+        <div class="card-header">
+            <h5 class="source_title">{{pitch.category}}</h5>
+        </div>
+            <div class="card-body">
+            <p>{{pitch.content}}</p>
+            <a href="/login.html">View More</a>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endmacro %}
