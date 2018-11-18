@@ -2,13 +2,20 @@ from flask import render_template,request,redirect,url_for,abort
 from flask_login import login_required,current_user
 from . import main
 from .. import db
-from ..models import Pitch,Comments,User,Upvote,Downvote
+from ..models import Pitch,Comment,User,Like,Dislike
 
 @main.route('/')
-def home():
-    posts = Pitch.query.all()
-    categories = db.session.query(Pitch.category).distinct().all()
-    defaultcategories = [('pickup lines',),('interview pitch',),('product pitch',),('business pitch',)]
-    categories = set(categories+defaultcategories)
-    print(categories)
-    return render_template('post.html', title = title,posts=posts,categories=categories)
+def index():
+    '''
+    View root page function that returns the index page and its data
+    '''
+    interviewpitches = Pitch.query.filter_by(category="Interview-Pitch").all()
+    productpitches = Pitch.query.filter_by(category="Product-Pitch").all()
+    promotionpitches = Pitch.query.filter_by(category="Promotion-Pitch").all()
+    businesspitches = Pitch.query.filter_by(category="Business-Pitch").all()
+
+    pitches = Pitch.query.filter_by().first()
+    likes = Like.get_all_likes(pitch_id=Pitch.id)
+    dislikes = Dislike.get_all_dislikes(pitch_id=Pitch.id)
+
+    return render_template('post.html', interviewpitches = interviewpitches, productpitches = productpitches, promotionpitches = promotionpitches, businesspitches = businesspitches, likes=likes, dislikes=dislikes)
