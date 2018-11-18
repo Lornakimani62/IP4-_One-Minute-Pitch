@@ -65,17 +65,17 @@ class Pitch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     category = db.Column(db.String(140))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     likes=db.relationship('Upvote', backref='post', lazy='dynamic')
-	dislikes=db.relationship('Downvote', backref='post', lazy='dynamic')
-	comments=db.relationship('Comments', backref='post', lazy='dynamic')
+    dislikes=db.relationship('Downvote', backref='post', lazy='dynamic')
+    comments=db.relationship('Comments', backref='post', lazy='dynamic')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     @classmethod
     def retrieve_posts(cls,id):
         pitches = Pitch.filter_by(id=id).all()
         return pitches
     '''
-    This class represents the pitches Pitched by 
+    This class represents the pitches Pitched by
     users.
     '''
     '''
@@ -86,7 +86,7 @@ class Pitch(db.Model):
     def __repr__(self):
         return '{}'.format(self.body)
 
-        
+
 class Comments(db.Model):
     __tablename__='comments'
     id = db.Column(db.Integer,primary_key= True)
@@ -95,17 +95,14 @@ class Comments(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def save(self):
-		db.session.add(self)
-		db.session.commit()
+        db.session.add(self)
+        db.session.commit()
 
 class Upvote(db.Model):
 	__tablename__='upvotes'
 	id=db.Column(db.Integer,primary_key=True)
-	userid=db.Column(db.Integer, db.ForeignKey('users.id'))
-	postid=db.Column(db.Integer, db.ForeignKey('pitches.id'))
-    '''
-    This class defines the likes in each post
-    '''
+	pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	def save(self):
 		db.session.add(self)
 		db.session.commit()
@@ -113,8 +110,9 @@ class Upvote(db.Model):
 class Downvote(db.Model):
 	__tablename__='downvotes'
 	id=db.Column(db.Integer,primary_key=True)
-	userid=db.Column(db.Integer, db.ForeignKey('users.id'))
-	postid=db.Column(db.Integer, db.ForeignKey('pitches.id'))
+	pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
 	def save(self):
 		db.session.add(self)
 		db.session.commit()
