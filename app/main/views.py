@@ -14,7 +14,7 @@ def index():
     promotionpitches = Pitch.query.filter_by(category="Promotion-Pitch").all()
     businesspitches = Pitch.query.filter_by(category="Business-Pitch").all()
 
-    pitches = Pitch.query.filter_by().first()
+    pitches = Pitch.query.filter().all()
     likes = Like.get_all_likes(pitch_id=Pitch.id)
     dislikes = Dislike.get_all_dislikes(pitch_id=Pitch.id)
 
