@@ -25,5 +25,8 @@ class Usertest(unittest.Testcase):
 
     def test_get_user(self):
         self.new_user.save_user()
-        fetched_user = User.get_user(1)
+        fetched_user = User.get_user('Lorna')
         self.assertTrue(len(fetched_user) == 1)
+
+    def test_password_setter(self):
+        self.assertTrue(self.new_user.password_hash is not None)
