@@ -5,6 +5,8 @@ from .. import db,photos
 from ..models import Pitch,Comment,User,Like,Dislike
 from .forms import UpdateProfile
 
+#Defines categories
+
 @main.route('/')
 def index():
     '''
@@ -20,6 +22,9 @@ def index():
     dislikes = Dislike.get_all_dislikes(pitch_id=Pitch.id)
 
     return render_template('index.html', interviewpitches = interviewpitches, productpitches = productpitches, promotionpitches = promotionpitches, businesspitches = businesspitches, likes=likes, dislikes=dislikes)
+
+# This view function defines the profile of the user
+
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
@@ -28,6 +33,8 @@ def profile(uname):
         abort(404)
 
     return render_template("profile/profile.html", user = user)
+
+# This view function defines the update profile functionality
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
@@ -48,6 +55,8 @@ def update_profile(uname):
 
     return render_template('profile/update.html',form =form)
 
+# This view function defines upload photo functionality
+
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
 def update_pic(uname):
@@ -58,3 +67,4 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
