@@ -3,6 +3,7 @@ from flask_login import login_required,current_user
 from . import main
 from .. import db
 from ..models import Pitch,Comment,User,Like,Dislike
+from .forms import UpdateProfile
 
 @main.route('/')
 def index():
