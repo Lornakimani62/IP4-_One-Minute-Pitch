@@ -5,7 +5,7 @@ from .. import db,photos
 from ..models import Pitch,Comment,User,Like,Dislike
 from .forms import UpdateProfile
 
-#Defines categories
+#This view function defines categories
 
 @main.route('/')
 def index():
