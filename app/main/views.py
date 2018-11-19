@@ -73,13 +73,13 @@ def update_pic(uname):
 @main.route('/pitch/new/', methods = ['GET','POST'])
 @login_required
 def new_pitch():
-    form = PitchForm()
+    pitch_form = PitchForm()
 
-    if form.validate_on_submit():
+    if pitch_form.validate_on_submit():
 
-        pitch_title= form.pitch_title.data
-        content= form.content.data
-        category= form.category.data
+        pitch_title= pitch_form.pitch_title.data
+        content= pitch_form.content.data
+        category=pitch_form.category.data
 
         # Updated review instance
         new_pitch = Pitch(pitch_title=pitch_title,content=content,category=category,user=current_user)
@@ -89,4 +89,4 @@ def new_pitch():
         return redirect(url_for('main.index'))
 
     title = 'New Pitch'
-    return render_template('new_pitch.html',title = title, pitch_form=form)
+    return render_template('new_pitch.html',title = title, pitch_form=pitch_form)
