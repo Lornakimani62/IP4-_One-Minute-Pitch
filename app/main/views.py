@@ -3,7 +3,7 @@ from flask_login import login_required,current_user
 from . import main
 from .. import db,photos
 from ..models import Pitch,Comment,User,Like,Dislike
-from .forms import UpdateProfile
+from .forms import UpdateProfile,PitchForm,CommentForm
 
 #This view function defines categories
 
@@ -68,3 +68,25 @@ def update_pic(uname):
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
 
+# This view function allows uses to post new pitches
+
+@main.route('/pitch/new/', methods = ['GET','POST'])
+@login_required
+def new_pitch():
+    form = PitchForm()
+
+    if form.validate_on_submit():
+
+        pitch_title= form.pitch_title.data
+        content= form.content.data
+        category= form.category.data
+
+        # Updated review instance
+        new_pitch = Pitch(pitch_title=pitch_title,content=content,category=category,user=current_user)
+
+        # save review method
+        new_pitch.save_pitch()
+        return redirect(url_for('main.index'))
+
+    title = 'New Pitch'
+    return render_template('new_pitch.html',title = title, pitch_form=form)
