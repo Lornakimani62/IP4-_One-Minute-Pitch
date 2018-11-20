@@ -5,10 +5,9 @@
     background-color:black;
     opacity: 0.8;
   }
-  /* .welcome {
-    padding-top: 10rem;
-    padding-bottom: calc(10rem - 56px);
-    background-image: url("/static/images/bck.jpeg");
-    background-position: center center;
-    background-size: cover;
-  } */
+
+.section-1 {
+  background-image: url("../images/header-bg.jpg");
+  background-position: center;
+  background-size: cover;
+}

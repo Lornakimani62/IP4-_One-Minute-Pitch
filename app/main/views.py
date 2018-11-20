@@ -6,8 +6,14 @@ from ..models import Pitch,Comment,User,Like,Dislike
 from .forms import UpdateProfile,PitchForm,CommentForm
 
 
-# This view function defines the profile of the user
+#landing page
+@main.route('/')
+def index():
+    title = 'Dashboard' if current_user.is_authenticated else 'Home'
+    posts = Pitch.query.all()
+    return render_template('index.html')
 
+# This view function defines the profile of the user
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
@@ -85,7 +91,7 @@ def new_pitch():
     return render_template('new_pitch.html',title = title, pitch_form=pitch_form, interviewpitches = interviewpitches, productpitches = productpitches, promotionpitches = promotionpitches, businesspitches = businesspitches, likes=likes, dislikes=dislikes)
 
 #Returns all the user's posts on the profile page
-@main.route('/post/<int:id>', methods = ['GET','POST'])
+@main.route('/pitch/<int:id>', methods = ['GET','POST'])
 @login_required
 def user_post(id):
 
@@ -96,20 +102,20 @@ def user_post(id):
 @main.route('/comment/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_comment(id):
-    comment = Comment.query.filter_by(pitch_id=id).all()
+    comment = Comment.query.filter_by(pitch_id=id)
 
     form_comment = CommentForm()
     if form_comment.validate_on_submit():
-        details = form_comment.details.data
+        comment_content = form_comment.details.data
 
-        new_comment = Comments(details = details,pitch_id=id,user=current_user)
+        new_comment = Comment(comment_content= comment_content,pitch_id=id,user=current_user)
         # # save comment
         db.session.add(new_comment)
         db.session.commit()
 
     return render_template('comments.html',form_comment = form_comment,comment=comment)
 
-#Returns likes on the pitch 
+#Returns likes on the pitch
 @main.route('/like/<int:id>')
 def like(id):
     if current_user.is_authenticated:
