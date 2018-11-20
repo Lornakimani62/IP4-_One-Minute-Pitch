@@ -5,11 +5,10 @@ from .forms import UpdateProfile,PitchForm,CommentForm
     <div class="row">
     {% for pitch in pitches %}
     <div class="category col-md-12">
-        <div class="jumbotron">
-            <h5 class="title">{{pitch.category}}</h5>
+        <div class="jumbotron"></div>
             <h3> {{pitch.pitch_title}}</h3>
             <p>{{pitch.content}}</p>
-            <a href="{{url_for('main.new_comment',id = pitch.id)}}"> Comment</a>
+            <a class="btn btn-light btn-xl sr-button" href="{{url_for('main.new_comment',id = pitch.id)}}"> Comment</a>
         </div>
     </div>
 
