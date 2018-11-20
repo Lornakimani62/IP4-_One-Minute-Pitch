@@ -5,8 +5,9 @@
     <div class="category col-md-12">
         <div class="jumbotron">
             <h5 class="title">{{pitch.category}}</h5>
+            <h3> {{pitch.pitch_title}}</h3>
             <p>{{pitch.content}}</p>
-            <p>{{pitch.author}}</p>
+            <a href="{{url_for('auth.login')}}">View More</a>
         </div>
     </div>
     {% endfor %}

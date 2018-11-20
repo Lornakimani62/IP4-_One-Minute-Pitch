@@ -75,18 +75,28 @@ def update_pic(uname):
 def new_pitch():
     pitch_form = PitchForm()
 
+    interviewpitches = Pitch.query.filter_by(category="Interview-Pitch").all()
+    productpitches = Pitch.query.filter_by(category="Product-Pitch").all()
+    promotionpitches = Pitch.query.filter_by(category="Promotion-Pitch").all()
+    businesspitches = Pitch.query.filter_by(category="Business-Pitch").all()
+
+    pitches = Pitch.query.filter().all()
+    likes = Like.get_all_likes(pitch_id=Pitch.id)
+    dislikes = Dislike.get_all_dislikes(pitch_id=Pitch.id)
+
     if pitch_form.validate_on_submit():
 
         pitch_title= pitch_form.pitch_title.data
         content= pitch_form.content.data
         category=pitch_form.category.data
 
-        # Updated review instance
+        # Updated  instance
         new_pitch = Pitch(pitch_title=pitch_title,content=content,category=category,user=current_user)
-
-        # save review method
+        pitches = Pitch.query.filter().all()
+        # save  method
         new_pitch.save_pitch()
-        return redirect(url_for('main.index'))
+
+        return redirect(url_for('main.new_pitch'))
 
     title = 'New Pitch'
-    return render_template('new_pitch.html',title = title, pitch_form=pitch_form)
+    return render_template('new_pitch.html',title = title, pitch_form=pitch_form, interviewpitches = interviewpitches, productpitches = productpitches, promotionpitches = promotionpitches, businesspitches = businesspitches, likes=likes, dislikes=dislikes)

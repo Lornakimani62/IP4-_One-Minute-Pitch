@@ -4,70 +4,113 @@
 <!-- Styles block -->
 
 {% block styles%}
-    {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
 {% endblock %}
 
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="container-fluid">
-    <div class="jumbotron">
-        <h1>In life, you only have 60 seconds to impress someone. 1 minute can make or break you.We give you a platform to pitch your ideas </h1>
+<head>
 
-    </div>
-</div>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Creative - One Minute Pitch </title>
 
 
-<!-- homepage section -->
-<div class="container-fluid">
-    <div class="row" id="Product">
-        <div class="category col-md-12">
-            <div class="jumbotron">
-                <h4 class="title">Product Pitches</h4>
-                <p><em>Take a minute to provide a product pitch that will get your customers attention. Read and comment on other pitches as well.</em></p>
-            </div>
-                <ul>
-                    {{macro.displayPitches(productpitches)}}
-                </ul>
+  <!-- Custom styles for this template -->
+
+  {{ super() }}
+  <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+
+</head>
+
+<body id="page-top">
+  <!-- Header -->
+<section class="bg-dark text-white">
+  <header class="masthead text-center text-black d-flex">
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <h1><strong>Your to goto website that allows your to post and view pitches</strong></h1>
+            <hr>
+          </div>
+          <div class="col-lg-8 mx-auto">
+          </div>
         </div>
-    </div>
+      </div>
+    </header>
+  </section>
 
-
-    <div class="row" id="Business">
-            <div class="category col-md-12">
-                <div class="jumbotron">
-                    <h4 class="title">Business Pitches</h4>
-                    <p><em>Take a minute to provide a Business pitch that will get investors attention. Read and comment on other pitches as well.</em></p>
-                </div>
-                    <ul>
-                        {{macro.displayPitches(businesspitches)}}
-                    </ul>
-            </div>
-    </div>
-
-    <div class="row" id="Promotion">
-            <div class="category col-md-12">
-                <div class="jumbotron">
-                    <h4 class="title">Promotion Pitches</h4>
-                    <p><em>Take a minute to provide an promotion pitch that will help people land that big promotion</em></p>
-                </div>
-                    <ul>
-                        {{macro.displayPitches(promotionpitches)}}
-                    </ul>
-
-            </div>
-    </div>
-    <div class="row" id="Interview">
-        <div class="category col-md-12">
-            <div class="jumbotron">
-                <h4 class="title">Interview Pitches</h4>
-                <p><em>Take a minute to provide an Interview pitch that will land someone a job </em></p>
-            </div>
-                <ul>
-                    {{macro.displayPitches(interviewpitches)}}
-                </ul>
-
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading">At Your Service</h2>
+          <h5 class="section-subheading text-muted">How do we make sure that you use your 1 minute to actually say something meaningful?</h5>
+          <hr class="my-4">
         </div>
-</div>
-</div>
-{% endblock%}
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 text-center">
+          <div class="service-box mt-5 mx-auto">
+            <h3 class="mb-3">Post Pitches</h3>
+            <p class="text-muted mb-0">At our idea hub our main aimis to get users to share their ideas with others and
+              make an impression</p>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 text-center">
+          <div class="service-box mt-5 mx-auto">
+            <h3 class="mb-3">View Pitches</h3>
+            <p class="text-muted mb-0">At Idea Hub we as well allow our users to view pitches posted by other users,
+              upvote or downvote them and as well leave a comment</p>
+          </div>
+        </div>
+  </section>
+
+  <!-- Get started -->
+  <div class="join" id="us">
+  <section class="bg-dark text-white">
+      <div class="container text-center">
+        <h2 class="mb-4">Join Us</h2>
+        <a class="btn btn-light btn-xl sr-button" href="{{url_for('auth.login')}}">Sign in</a>
+      </div>
+    </section>
+    </div>
+
+<!-- Contact section -->
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="section-heading">Let's Get In Touch!</h2>
+          <hr class="my-4">
+          <p class="mb-5">Give us a call or send us an email and we will get back to you as soon as possible!</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 ml-auto text-center">
+          <i class="fas fa-phone fa-3x mb-3 sr-contact-1"></i>
+          <p>254-169-839</p>
+        </div>
+        <div class="col-lg-4 mr-auto text-center">
+          <i class="fas fa-envelope fa-3x mb-3 sr-contact-2"></i>
+          <p>
+            <a href="mailto:ideahub96@gmail.com">ideahub96@gmail.com</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  {% endblock%}
