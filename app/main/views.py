@@ -95,8 +95,8 @@ def new_pitch():
 @login_required
 def user_post(id):
 
-    users_post = Pitch.query.filter_by(user_id=id).all()
-    return render_template('profile.html',users_post = users_post)
+    users_post = Pitch.query.filter_by(user_id=id)
+    return render_template('profile/profile.html',users_post = users_post)
 
 # This function allows users to comment on pitches
 @main.route('/comment/<int:id>', methods = ['GET','POST'])
@@ -119,9 +119,9 @@ def new_comment(id):
 @main.route('/like/<int:id>')
 def like(id):
     if current_user.is_authenticated:
-        if current_user.likes.filter(Upvote.postid==id).first():
+        if current_user.likes.filter_by(Upvote.pitch_id==id).first():
             return 'Error'
-        Upvote(userid=current_user.id,postid=id).save()
+        Upvote(userid=current_user.id,pitch_id=id).save()
         return 'Success'
     return 'Error'
 

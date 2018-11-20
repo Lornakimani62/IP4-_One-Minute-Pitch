@@ -9,12 +9,7 @@ from .forms import UpdateProfile,PitchForm,CommentForm
             <h5 class="title">{{pitch.category}}</h5>
             <h3> {{pitch.pitch_title}}</h3>
             <p>{{pitch.content}}</p>
-            <a href="{{url_for('auth.login')}}">View More</a>
-            <div class="comments">
-
-                <a href="{{url_for('main.new_comment',id = pitch.id)}}"> Comment</a>
-
-                </div>
+            <a href="{{url_for('main.new_comment',id = pitch.id)}}"> Comment</a>
         </div>
     </div>
 
